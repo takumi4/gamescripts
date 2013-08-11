@@ -1,0 +1,25 @@
+{
+    "name": "5173 helper",
+    "manifest_version":2,
+    "version": "1.0",
+    "description": "5173 helper",
+    "browser_action": {
+        "default_icon": "icon.png" ,
+        "default_title": "5173 helper",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "page": "background.html"
+    },
+    "content_scripts": [{
+        "matches": ["http://*.5173.com/*"],
+        "js": ["js/jquery-2.0.3.min.js", "js/main.js"],
+        "run_at": "document_start",
+        "all_frames": true
+    }],
+    "permissions": [
+        "http://*/*"
+        ,"https://*/*"
+        ,"tabs" 
+    ]
+}
