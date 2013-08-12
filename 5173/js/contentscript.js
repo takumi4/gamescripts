@@ -1,7 +1,11 @@
 (function() {
   $(function() {
-    var buyLinks, customGoldData, getMaxGold, maxGold, wantGold;
-    wantGold = 450;
+    var buyLinks, customGoldData, getMaxGold, maxGold, playCatAudio, wantGold;
+    wantGold = 420;
+    playCatAudio = function() {
+      $(document.body).remove('audio');
+      return $(document.body).append('<audio src="http://lichaosoft.net/res/cat.ogg" autoplay="autoplay"></audio');
+    };
     buyLinks = new BuyLinks;
     customGoldData = function(goldEl, buyLink) {
       var regexpRets;
@@ -41,18 +45,21 @@
     };
     maxGold = getMaxGold();
     if (maxGold) {
-      if (confirm("现价1元可以购买:" + maxGold.gold + "金，请问是否买入？")) {
-        buyLinks.write(maxGold.buyLink);
-        return chrome.runtime.sendMessage({
-          type: 'OPEN_TAB',
-          url: maxGold.buyLink
-        }, function(resp) {});
-      } else {
-        buyLinks.write(maxGold.buyLink);
-        return setTimeout(function() {
-          return location.href = location.href;
-        });
-      }
+      playCatAudio();
+      return setTimeout(function() {
+        if (confirm("现价1元可以购买:" + maxGold.gold + "金，请问是否买入？")) {
+          buyLinks.write(maxGold.buyLink);
+          return chrome.runtime.sendMessage({
+            type: 'OPEN_TAB',
+            url: maxGold.buyLink
+          }, function(resp) {});
+        } else {
+          buyLinks.write(maxGold.buyLink);
+          return setTimeout(function() {
+            return location.href = location.href;
+          });
+        }
+      }, 1000);
     } else {
       return setTimeout(function() {
         return location.href = location.href;

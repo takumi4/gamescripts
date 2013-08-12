@@ -2,7 +2,12 @@
 # test ssh key
 $(()->
 
-    wantGold = 450 #可以接受的金价 1元购入450以上金
+    wantGold = 420 #可以接受的金价 1元购入450以上金
+
+    playCatAudio = ->
+        $(document.body).remove('audio')
+        $(document.body).append('<audio src="http://lichaosoft.net/res/cat.ogg" autoplay="autoplay"></audio')
+
 
     buyLinks = new BuyLinks
 
@@ -45,20 +50,22 @@ $(()->
     #当前列表中最好的金价，大于可以接受的金价
     if maxGold
 
+        playCatAudio()
+        setTimeout( ->
+            if confirm "现价1元可以购买:#{maxGold.gold}金，请问是否买入？"
+                buyLinks.write(maxGold.buyLink)
+                chrome.runtime.sendMessage({
+                    type: 'OPEN_TAB', 
+                    url: maxGold.buyLink 
+                }, (resp)->
+                    #alert resp.msg
+                )
+            else
+                buyLinks.write(maxGold.buyLink)
 
-        if confirm "现价1元可以购买:#{maxGold.gold}金，请问是否买入？"
-            buyLinks.write(maxGold.buyLink)
-            chrome.runtime.sendMessage({
-                type: 'OPEN_TAB', 
-                url: maxGold.buyLink 
-            }, (resp)->
-                #alert resp.msg
-            )
-        else
-            buyLinks.write(maxGold.buyLink)
-
-            setTimeout ->
-                location.href = location.href       #点击否，则忽略此次价格，立即刷新页面列表
+                setTimeout ->
+                    location.href = location.href       #点击否，则忽略此次价格，立即刷新页面列表
+        , 1000)
     else
         setTimeout(->
             location.href = location.href
