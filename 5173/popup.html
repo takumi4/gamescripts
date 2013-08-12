@@ -2,7 +2,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/popup.css" />
+<script src="js/jquery-2.0.3.min.js"></script>
+<script src="js/doT.min.js"></script>
+<script src="js/popup.js"></script>
 </head>
 <body>
+<div id="stage">
+    <div class="pages"></div>
+    <footer></footer>
+</div>
+<script type="script/template" id="tmp-fieldset">
+{{~it.pages :value:index}}
+<fieldset>
+    <legend>gold-page setting</legend>
+    <label for="url"></label>
+    <input type="text" id="url-1" name="url-1" value="{{=value.url}}" />
+
+    <label for="gold"></label>
+    <input type="text" id="gold-1" name="gold-1" value="{{=value.gold}}" />
+</fieldset>
+{{~}}
+</script>
 </body>
 </html>
