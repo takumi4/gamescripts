@@ -2,7 +2,13 @@
 # test ssh key
 $(()->
 
-    wantGold = 420 #可以接受的金价 1元购入450以上金
+    if ! (new RegExp('http://s.5173.com/search/.*shtml$').test(location.href))
+        return
+
+
+    wantGold = 450 #可以接受的金价 1元购入450以上金
+
+    autoBuy = true
 
     playCatAudio = ->
         $(document.body).remove('audio')
@@ -52,13 +58,16 @@ $(()->
 
         playCatAudio()
         setTimeout( ->
-            if confirm "现价1元可以购买:#{maxGold.gold}金，请问是否买入？"
+            if autoBuy or confirm "现价1元可以购买:#{maxGold.gold}金，请问是否买入？"
                 buyLinks.write(maxGold.buyLink)
                 chrome.runtime.sendMessage({
                     type: 'OPEN_TAB', 
                     url: maxGold.buyLink 
                 }, (resp)->
                     #alert resp.msg
+                    setTimeout ->
+                        location.href = location.href
+                    , 2000
                 )
             else
                 buyLinks.write(maxGold.buyLink)

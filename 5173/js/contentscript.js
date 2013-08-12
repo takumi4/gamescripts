@@ -1,7 +1,11 @@
 (function() {
   $(function() {
-    var buyLinks, customGoldData, getMaxGold, maxGold, playCatAudio, wantGold;
-    wantGold = 420;
+    var autoBuy, buyLinks, customGoldData, getMaxGold, maxGold, playCatAudio, wantGold;
+    if (!(new RegExp('http://s.5173.com/search/.*shtml$').test(location.href))) {
+      return;
+    }
+    wantGold = 450;
+    autoBuy = true;
     playCatAudio = function() {
       $(document.body).remove('audio');
       return $(document.body).append('<audio src="http://lichaosoft.net/res/cat.ogg" autoplay="autoplay"></audio');
@@ -47,12 +51,16 @@
     if (maxGold) {
       playCatAudio();
       return setTimeout(function() {
-        if (confirm("现价1元可以购买:" + maxGold.gold + "金，请问是否买入？")) {
+        if (autoBuy || confirm("现价1元可以购买:" + maxGold.gold + "金，请问是否买入？")) {
           buyLinks.write(maxGold.buyLink);
           return chrome.runtime.sendMessage({
             type: 'OPEN_TAB',
             url: maxGold.buyLink
-          }, function(resp) {});
+          }, function(resp) {
+            return setTimeout(function() {
+              return location.href = location.href;
+            }, 2000);
+          });
         } else {
           buyLinks.write(maxGold.buyLink);
           return setTimeout(function() {
