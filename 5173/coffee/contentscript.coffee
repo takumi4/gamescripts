@@ -1,4 +1,5 @@
 # author by lichaosoft.net
+# test ssh key
 $(()->
 
     wantGold = 450 #可以接受的金价 1元购入450以上金
