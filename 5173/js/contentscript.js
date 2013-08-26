@@ -4,7 +4,7 @@
     if (location.href !== 'http://s.5173.com/search/a36ead01453c40b584f8e1e687723f2d-5ootfk-1got2e-ymz55j-0-kb0ewi-0-0-0-a-a-a-a-a-0-itemprice_asc-0-0.shtml') {
       return;
     }
-    wantGold = 500;
+    wantGold = 480;
     autoBuy = true;
     playCatAudio = function() {
       $(document.body).remove('audio');

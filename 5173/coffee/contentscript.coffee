@@ -6,7 +6,7 @@ $(()->
         return
 
 
-    wantGold = 500 #可以接受的金价 1元购入450以上金
+    wantGold = 480 #可以接受的金价 1元购入450以上金
 
     autoBuy = true
 
