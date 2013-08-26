@@ -31,7 +31,7 @@
         return b.gold - a.gold;
       });
       sortGolds = sortGolds.filter(function(gold) {
-        return gold.gold > wantGold;
+        return gold.gold >= wantGold;
       });
       sortGolds = sortGolds.filter(function(gold) {
         if (!(new RegExp('Consignment$').test(gold.buyLink))) {

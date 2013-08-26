@@ -32,7 +32,7 @@ $(()->
 
 
         sortGolds = sortGolds.filter (gold) ->
-            gold.gold > wantGold
+            gold.gold >= wantGold
 
 
 
