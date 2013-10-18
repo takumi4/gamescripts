@@ -4,7 +4,6 @@
  */
 Crafty.c('Tree', {
     init: function(){
-        this.requires('Actor, Color')
-        .color('rgb(20, 125, 40)');
+        this.requires('Actor, Color, spr_tree');
     }
 });

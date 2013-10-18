@@ -17,6 +17,8 @@ Crafty.scene('Game', function(){
     this.occupied[this.player.at().x][this.player.at().y] = true;
 
 
+
+
     for(var x=0; x<Game.map_grid.width; x++){
         for(var y=0; y<Game.map_grid.height; y++){
             var at_edge = x == 0 || x == Game.map_grid.width - 1 || y == 0 || y == Game.map_grid.height - 1;
@@ -33,8 +35,6 @@ Crafty.scene('Game', function(){
 
     }
 
-
-
     max_villages = 5;
     for(var x=0; x<Game.map_grid.width; x++){
         for(var y=0; y<Game.map_grid.height; y++){
@@ -42,11 +42,11 @@ Crafty.scene('Game', function(){
 
                 if(Crafty('Village').length < max_villages && !this.occupied[x][y]){
                     Crafty.e('Village').at(x, y);
+                    //this.occupied[x][y] = true;
                 }
             }
         }
     }
-
 
     this.show_visited = this.bind('VillageVisited', function(){
         if(!Crafty('Village').length){
@@ -59,8 +59,6 @@ Crafty.scene('Game', function(){
             Crafty.scene('Victory');
         }
     });
-
-
 
 }, function(){
     this.unbind('VillageVisited', this.show_visited);

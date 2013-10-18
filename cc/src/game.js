@@ -1,3 +1,6 @@
+/**
+ * Game
+ */
 Game = {
     map_grid: {
         width: 24,
@@ -20,7 +23,7 @@ Game = {
         Crafty.init(Game.width(), Game.height());
         Crafty.background('rgb(249, 223, 125)');
 
-        Crafty.scene('Game');
+        Crafty.scene('Loading');
 
     }
 }

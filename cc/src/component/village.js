@@ -4,8 +4,7 @@
  */
 Crafty.c('Village', {
     init: function(){
-        this.requires('Actor, Color')
-        .color('rgb(170, 125, 40)');
+        this.requires('Actor, Color, spr_flower');
     },
 
     visited: function(){

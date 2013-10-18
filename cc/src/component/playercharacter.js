@@ -4,21 +4,19 @@
  */
 Crafty.c('PlayerCharacter', {
     init: function(){
-        this.requires('Actor, Fourway, Color, Collision')
+        this.requires('Actor, Fourway, Color, Collision, spr_taobao')
         .fourway(4)
-        .color('rgb(20, 75, 40)')
-        .stopOnSolids()
-        .onHit('Village', this.visitVillage);
+        .color('rgba(1,1,1,0)')
+        .onHit('Village', this.visitVillage)
+        .stopOnSolids();
     },
 
     stopOnSolids: function(){
-        this.onHit('Tree', this.stopMovement);
-        this.onHit('Bush', this.stopMovement);
+        this.onHit('Actor', this.stopMovement);
         return this;
     },
 
     stopMovement: function(){
-        console.log(arguments);
         this._speed = 0;
         if(this._movement){
             this.x -= this._movement.x;
