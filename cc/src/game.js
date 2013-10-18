@@ -27,3 +27,8 @@ Game = {
 
     }
 }
+var $textCss = {
+    'font-size': '24px',
+    'color': 'red',
+    'text-align': 'center'
+};

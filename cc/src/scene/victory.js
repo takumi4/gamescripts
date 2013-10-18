@@ -4,8 +4,9 @@
  */
 Crafty.scene('Victory', function(){
     Crafty.e('2D, DOM, Text')
-    .attr({x:0, y:0})
-    .text('Victory!');
+    .attr({x:0, y:Game.height() / 2 - 24, w: Game.width()})
+    .text('Victory!')
+    .css($textCss);
 
     this.restart_game = this.bind('KeyDown', function(){
         Crafty.scene('Game');
